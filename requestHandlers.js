@@ -1,5 +1,5 @@
 // the request handlers!
-// now add require
+// now add require for a new node module called child_process that executes a shell from within this process
 var exec = require("child_process").exec;
 
 // start URL request...
