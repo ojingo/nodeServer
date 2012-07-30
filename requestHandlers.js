@@ -3,23 +3,25 @@
 var exec = require("child_process").exec;
 
 // start URL request...
-function startpage() {
+function startpage(response) {
 
 // this now runs another shell? that executes on its own and won't block?	
   console.log("Request handler 'start' was called.");
-  var content = "empty";
-
+  // now we use a response with the non block but also can come back when done?
   exec("ls -lah", function (error, stdout, stderr) {
-    content = stdout;
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write(stdout);
+    response.end();
   });
-
-  return content;
 }
 
 // a upload URL request...
 function upload() {
 	console.log("Request handler 'upload' was called.");
-	return "Uploading";
+	// 
+	response.writeHead(200, {"Content-Type": "text/plain"});
+	response.write("Hello Upload");
+	response.end();
 }
 
 function test() {
