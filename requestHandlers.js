@@ -1,15 +1,19 @@
 // the request handlers!
+// now add require
+var exec = require("child_process").exec;
 
 // start URL request...
 function startpage() {
-	
-	function sleep(milliSeconds) {
-    var startTime = new Date().getTime();
-    while (new Date().getTime() < startTime + milliSeconds);
-	}
 
-	sleep(10000);
-	return "Hello Start";
+// this now runs another shell? that executes on its own and won't block?	
+  console.log("Request handler 'start' was called.");
+  var content = "empty";
+
+  exec("ls -lah", function (error, stdout, stderr) {
+    content = stdout;
+  });
+
+  return content;
 }
 
 // a upload URL request...
