@@ -7,7 +7,8 @@ function route(handle, pathname) {
    // now it checks handle[pathname] and compares it to type function if true it pulls that keypair from the 
    // array and adds a function execution () at the end! triggering handle[pathname]()
    if (typeof handle[pathname] === 'function') {
-    return handle[pathname]();
+    // now we pass thru response and do not return!
+    handle[pathname](response);
   } else {
     console.log("No request handler found for " + pathname);
     return "404 NOT FOUND!";
