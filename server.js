@@ -20,17 +20,9 @@ function start(route, handle) {
 	  // tell us what pathname was requested
 	  console.log("Request for " + pathname + " received.");
 
-	  response.writeHead(200, {"Content-Type": "text/plain"});
-
-	  // now route it ( goes to router.js )
-	  // it also sends in handle which is the array of handlers with key value pairing
-	  var content = route(handle, pathname)
-	  console.log(content);
-	  response.write(content);
-
-	  // write something back
-	  // response.write("Hello World I am the response!");
-	  response.end();
+	  // now were sending a new 3rd parameter called response
+	  route(handle, pathname, response);
+	  
 	}
 	
 	http.createServer(onRequest).listen(8888);
