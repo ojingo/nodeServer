@@ -2,7 +2,7 @@
 // it exports route() as a function!
 
 
-function route(handle, pathname) {
+function route(handle, pathname, response) {
   console.log("About to route a request for " + pathname);
    // now it checks handle[pathname] and compares it to type function if true it pulls that keypair from the 
    // array and adds a function execution () at the end! triggering handle[pathname]()
