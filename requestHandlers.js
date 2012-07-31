@@ -6,6 +6,8 @@ var exec = require("child_process").exec;
 function startpage(response) {
 
 // new upload interface!
+// pressing the button activates action /upload 
+
 console.log("Request handler 'start' was called.");
 
   var body = '<html>'+

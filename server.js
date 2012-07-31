@@ -10,18 +10,23 @@ var url = require("url");
 // accepts route as incoming parameter 
 
 function start(route, handle) {
-	function onRequest(request, response) {
-	  // get the PATH from the request
-	  var pathname = url.parse(request.url).pathname;
-	  
-	  // turn on below if you need to see the entire RAW request!
-	  // console.log(request);
-	  
-	  // tell us what pathname was requested
-	  console.log("Request for " + pathname + " received.");
+	// 
+	var postData = "";
+    var pathname = url.parse(request.url).pathname;
+    console.log("Request for " + pathname + " received.");
 
-	  // now were sending a new 3rd parameter called response
-	  route(handle, pathname, response);
+    request.setEncoding("utf8");
+
+    request.addListener("data", function(postDataChunk) {
+      postData += postDataChunk;
+      console.log("Received POST data chunk '"+
+      postDataChunk + "'.");
+    });
+
+    request.addListener("end", function() {
+      route(handle, pathname, response, postData);
+    });
+
 	  
 	}
 	
