@@ -30,12 +30,11 @@ console.log("Request handler 'start' was called.");
 }
 
 // a upload URL request...
-function upload(response) {
-	console.log("Request handler 'upload' was called.");
-	// 
-	response.writeHead(200, {"Content-Type": "text/plain"});
-	response.write("Hello Upload");
-	response.end();
+function upload(response, postData) {
+  console.log("Request handler 'upload' was called.");
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.write("You've sent: " + postData);
+  response.end();
 }
 
 function test(response) {
