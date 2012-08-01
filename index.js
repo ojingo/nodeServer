@@ -5,7 +5,7 @@ var server = require("./server");
 var router = require("./router");
 var requestHandlers = require("./requestHandlers");
 
-// now the associative object array that gets passed in
+// now the associative object array that gets passed in ( like a dictionary! )
 var handle = {}
 handle["/"] = requestHandlers.startpage;
 handle["/start"] = requestHandlers.startpage;
