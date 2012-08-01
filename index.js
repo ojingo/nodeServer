@@ -14,6 +14,7 @@ handle["/upload"] = requestHandlers.upload;
 handle["/upload/"] = requestHandlers.upload;
 handle["/test"] = requestHandlers.test;
 handle["/test/"] = requestHandlers.test;
+handle["/show"] = requestHandlers.show;
 
 // then it uses the exported function of start()
 // and sends in a parameter of router.route 

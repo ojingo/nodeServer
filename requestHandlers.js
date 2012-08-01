@@ -1,6 +1,8 @@
 // the request handlers!
 // now add require for a new node module called child_process that executes a shell from within this process
 // var exec = require("child_process").exec;
+// require fs which lets you deal with filesystem stuffs
+
 var querystring = require("querystring"),
 	fs = require("fs");
 
