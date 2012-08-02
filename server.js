@@ -10,29 +10,14 @@ var url = require("url");
 // accepts route as incoming parameter 
 
 function start(route, handle) {
-	function onRequest(request, response) {
-	var postData = "";
+  function onRequest(request, response) {
     var pathname = url.parse(request.url).pathname;
     console.log("Request for " + pathname + " received.");
+    route(handle, pathname, response, request); // notice this part keeps growing - sending it 4 objects now
+  }
 
-    request.setEncoding("utf8");
-
-    request.addListener("data", function(postDataChunk) {
-      postData += postDataChunk;
-      console.log("Received POST data chunk '"+
-      postDataChunk + "'.");
-    });
-
-    request.addListener("end", function() {
-      route(handle, pathname, response, postData);
-    });
-
-	  
-	}
-	
-	http.createServer(onRequest).listen(8888);
-	console.log("Server has started.\n");
-	console.log("Server running at http://localhost:8888/");
+  http.createServer(onRequest).listen(8888);
+  console.log("Server has started.");
 }
 
 // exporting the function start
