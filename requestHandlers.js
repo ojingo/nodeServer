@@ -2,12 +2,15 @@
 // now add require for a new node module called child_process that executes a shell from within this process
 // var exec = require("child_process").exec;
 // require fs which lets you deal with filesystem stuffs
+// require formidable the formupload module for node
 
 var querystring = require("querystring"),
 	fs = require("fs");
+	formidable = require("formidable");
+
 
 // start URL request...
-function startpage(response, postData) {
+function startpage(response) {
 
 // new upload interface!
 // pressing the button activates action /upload 
@@ -35,12 +38,27 @@ console.log("Request handler 'start' was called.");
 }
 
 // a upload URL request...
-function upload(response, postData) {
+function upload(response, request) {
   console.log("Request handler 'upload' was called.");
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("You've sent the text: "+
-  querystring.parse(postData).text);
-  response.end();
+
+  var form = new formidable.IncomingForm();
+  console.log("about to parse");
+  form.parse(request, function(error, fields, files) {
+    console.log("parsing done");
+
+    /* Possible error on Windows systems:
+       tried to rename to an already existing file */
+    fs.rename(files.upload.path, "/tmp/test.png", function(err) {
+      if (err) {
+        fs.unlink("/tmp/test.png");
+        fs.rename(files.upload.path, "/tmp/test.png");
+      }
+    });
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write("received image:<br/>");
+    response.write("<img src='/show' />");
+    response.end();
+  });
 }
 
 // show for uploads
